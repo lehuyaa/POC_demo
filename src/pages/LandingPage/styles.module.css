@@ -1,0 +1,3 @@
+.root {
+  @apply min-h-screen max-w-7xl mx-auto mt-[-100px];
+}

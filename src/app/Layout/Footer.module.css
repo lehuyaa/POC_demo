@@ -1,0 +1,4 @@
+.root {
+  @apply w-full top-0 z-50 flex items-center flex-wrap justify-center md:justify-between py-4 px-4 sm:mx-0 sm:px-0 md:px-6;
+  background-color: rgba(0, 0, 0, 1) !important;
+}

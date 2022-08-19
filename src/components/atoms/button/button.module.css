@@ -1,0 +1,7 @@
+.button {
+  @apply w-full sm:w-auto flex-none bg-blue-700 hover:bg-blue-800 text-white text-lg leading-6 font-semibold py-2 rounded-lg px-6 border border-transparent  focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition-colors duration-200;
+}
+
+.loadingButton {
+  @apply inline-flex justify-center items-center w-full sm:w-auto flex-none bg-blue-700 hover:bg-blue-800 text-white text-lg leading-6 font-semibold py-2 rounded-lg px-6 border border-transparent  focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition ease-in-out duration-150 cursor-not-allowed;
+}

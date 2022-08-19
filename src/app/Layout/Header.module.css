@@ -1,0 +1,21 @@
+.root {
+  @apply fixed w-full top-0 z-50 flex items-center justify-between py-4 px-4 sm:mx-0 sm:px-0 md:px-6;
+  backdrop-filter: blur(5px) !important;
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+
+.navLeft {
+  @apply mt-4 inline-block pb-4 pl-8;
+}
+
+.logo {
+  @apply align-middle text-3xl font-bold text-green-400;
+}
+
+.list {
+  @apply hidden pl-14 align-middle xl:inline-block;
+}
+
+.item {
+  @apply pr-12 text-xl text-white transition duration-500 hover:opacity-25;
+}

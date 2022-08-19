@@ -1,0 +1,23 @@
+.root {
+  @apply min-h-screen max-w-7xl mx-auto mt-[-50px];
+}
+
+.headerTopTitle {
+  @apply text-2xl sm:text-4xl leading-none font-bold tracking-tight text-purple-400;
+}
+
+.headerTopTitleVital {
+  @apply text-[gold] opacity-75;
+}
+
+.headerTitle {
+  @apply text-6xl lg:text-7xl leading-none font-extrabold tracking-tight  mb-8 sm:mb-10 text-transparent bg-clip-text bg-gradient-to-br from-purple-400 to-purple-800;
+}
+
+.tabs {
+  @apply rounded-md transition duration-500 cursor-pointer sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start font-medium inline-flex items-center leading-none  hover:opacity-50 tracking-wider;
+}
+
+.tabActive {
+  @apply rounded-md transition duration-500 cursor-pointer sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start font-bold inline-flex items-center leading-none  text-black  bg-[gold] tracking-wider;
+}

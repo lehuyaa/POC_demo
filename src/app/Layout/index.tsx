@@ -1,0 +1,11 @@
+import styles from "./styles.module.css";
+
+const Layout = ({ children }) => {
+  return (
+    <>
+      <main className={styles.main}>{children}</main>
+    </>
+  );
+};
+
+export default Layout;

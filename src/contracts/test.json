@@ -1,0 +1,1295 @@
+[
+  {
+    "type": "constructor",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_adminProjectRouter",
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "_transferRouter",
+        "internalType": "address"
+      },
+      { "type": "address", "name": "_committee", "internalType": "address" },
+      { "type": "address", "name": "_kyc", "internalType": "address" },
+      {
+        "type": "uint256",
+        "name": "_acceptedKycLevel",
+        "internalType": "uint256"
+      },
+      { "type": "address", "name": "_KKUB", "internalType": "address" },
+      {
+        "type": "address",
+        "name": "_adminKAP20Router",
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "_bitkubDataFeedNFT",
+        "internalType": "address"
+      },
+      { "type": "address", "name": "_dataFeedType", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "AdminKAP20RouterSet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "oldAdminKAP20Router",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "newAdminKAP20Router",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "AdminProjectRouterSet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "oldAdmin",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "newAdmin",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "BitkubDataFeedNFTSet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "oldBitkubDataFeedNFT",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "newBitkubDataFeedNFT",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "DataFeedTypeSet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "oldDataFeedType",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "newDataFeedType",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NewSubscription",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "packageID",
+        "internalType": "uint256",
+        "indexed": true
+      },
+      {
+        "type": "uint256",
+        "name": "tokenID",
+        "internalType": "uint256",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "tuple",
+        "name": "packageDetails",
+        "internalType": "struct PackageDetails",
+        "indexed": false,
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "PackageAdded",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "packageID",
+        "internalType": "uint256",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "tuple",
+        "name": "packageDetails",
+        "internalType": "struct PackageDetails",
+        "indexed": false,
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "PackageUpdated",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "packageID",
+        "internalType": "uint256",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "tuple",
+        "name": "oldPackageDetails",
+        "internalType": "struct PackageDetails",
+        "indexed": false,
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      },
+      {
+        "type": "tuple",
+        "name": "newPackageDetails",
+        "internalType": "struct PackageDetails",
+        "indexed": false,
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Paused",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "account",
+        "internalType": "address",
+        "indexed": false
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SetCommittee",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "oldCommittee",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "newCommittee",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SubscriptionEdited",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "tokenID",
+        "internalType": "uint256",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "tuple",
+        "name": "oldSubscriptionDetails",
+        "internalType": "struct SubscriptionDetails",
+        "indexed": false,
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      },
+      {
+        "type": "tuple",
+        "name": "newSubscriptionDetails",
+        "internalType": "struct SubscriptionDetails",
+        "indexed": false,
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SubscriptionRenewed",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "tokenID",
+        "internalType": "uint256",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "tuple",
+        "name": "oldSubscriptionDetails",
+        "internalType": "struct SubscriptionDetails",
+        "indexed": false,
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      },
+      {
+        "type": "tuple",
+        "name": "newSubscriptionDetails",
+        "internalType": "struct SubscriptionDetails",
+        "indexed": false,
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TokenWithdrawn",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "token",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "to",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "uint256",
+        "name": "amount",
+        "internalType": "uint256",
+        "indexed": false
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TransferRouterSet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "oldTransferRouter",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "newTransferRouter",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Unpaused",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "account",
+        "internalType": "address",
+        "indexed": false
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      { "type": "address", "name": "", "internalType": "contract IKAP20" }
+    ],
+    "name": "KKUB",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "string", "name": "", "internalType": "string" }],
+    "name": "PROJECT",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "name": "acceptedKycLevel",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "activateOnlyKYCAddress",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "addPackage",
+    "inputs": [
+      {
+        "type": "tuple",
+        "name": "_details",
+        "internalType": "struct PackageDetails",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract IAdminKAP20Router"
+      }
+    ],
+    "name": "adminKAP20Router",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract IAdminProjectRouter"
+      }
+    ],
+    "name": "adminProjectRouter",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "adminTokenWithdraw",
+    "inputs": [
+      { "type": "address", "name": "_token", "internalType": "address" },
+      { "type": "address", "name": "_to", "internalType": "address" },
+      { "type": "uint256", "name": "_amount", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract BitkubDataFeedNFTInterface"
+      }
+    ],
+    "name": "bitkubDataFeedNFT",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "address", "name": "", "internalType": "address" }],
+    "name": "committee",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract DataFeedTypeInterface"
+      }
+    ],
+    "name": "dataFeedType",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "disablePackage",
+    "inputs": [
+      { "type": "uint256", "name": "_packageID", "internalType": "uint256" },
+      { "type": "bool", "name": "_disabled", "internalType": "bool" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "disableSubscription",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" },
+      { "type": "bool", "name": "_disabled", "internalType": "bool" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "editSubscription",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" },
+      {
+        "type": "tuple",
+        "name": "_details",
+        "internalType": "struct SubscriptionDetails",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "name": "getMaximumReaderCount",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "initialize",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_bitkubDataFeedNFT",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }],
+    "name": "initialized",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }],
+    "name": "isActivatedOnlyKYCAddress",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }],
+    "name": "isSubscribed",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" },
+      { "type": "address", "name": "_dataFeedAddr", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract IKYCBitkubChain"
+      }
+    ],
+    "name": "kyc",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "name": "packageCount",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple",
+        "name": "",
+        "internalType": "struct PackageDetails",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "name": "packageDetails",
+    "inputs": [
+      { "type": "uint256", "name": "_packageID", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple[]",
+        "name": "",
+        "internalType": "struct PackageDetails[]",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "name": "packageDetails",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple[]",
+        "name": "",
+        "internalType": "struct PackageDetails[]",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "name": "packageDetailsByIDs",
+    "inputs": [
+      {
+        "type": "uint256[]",
+        "name": "_packageIDs",
+        "internalType": "uint256[]"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "pause",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }],
+    "name": "paused",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "renew",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "renew",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" },
+      { "type": "address", "name": "_bitkubNext", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setAcceptedKYCLevel",
+    "inputs": [
+      { "type": "uint256", "name": "_kycLevel", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setAdminKAP20Router",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_adminKAP20Router",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setAdminProjectRouter",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_adminProjectRouter",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setBitkubDataFeedNFT",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_bitkubDataFeedNFT",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setCommittee",
+    "inputs": [
+      { "type": "address", "name": "_committee", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setDataFeedType",
+    "inputs": [
+      { "type": "address", "name": "_dataFeedType", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setKYC",
+    "inputs": [{ "type": "address", "name": "_kyc", "internalType": "address" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setTransferRouter",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_transferRouter",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "subscribe",
+    "inputs": [
+      { "type": "uint256", "name": "_packageID", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "subscribe",
+    "inputs": [
+      { "type": "uint256", "name": "_packageID", "internalType": "uint256" },
+      { "type": "address", "name": "_bitkubNext", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple",
+        "name": "",
+        "internalType": "struct SubscriptionDetails",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "name": "subscriptionDetails",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple[]",
+        "name": "",
+        "internalType": "struct SubscriptionDetails[]",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "name": "subscriptionDetailsByIDs",
+    "inputs": [
+      { "type": "uint256[]", "name": "_tokenIDs", "internalType": "uint256[]" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple",
+        "name": "",
+        "internalType": "struct SubscriptionPermissionDetails",
+        "components": [
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "name": "subscriptionPermissionDetails",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple[]",
+        "name": "",
+        "internalType": "struct SubscriptionPermissionDetails[]",
+        "components": [
+          { "type": "uint128", "name": "endDate", "internalType": "uint128" },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ],
+    "name": "subscriptionPermissionDetailsByIDs",
+    "inputs": [
+      { "type": "uint256[]", "name": "_tokenIDs", "internalType": "uint256[]" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple",
+        "name": "",
+        "internalType": "struct SubscriptionRenewalAndMiscDetails",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint16", "name": "renewalCount", "internalType": "uint16" }
+        ]
+      }
+    ],
+    "name": "subscriptionRenewalAndMiscDetails",
+    "inputs": [
+      { "type": "uint256", "name": "_tokenID", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "tuple[]",
+        "name": "",
+        "internalType": "struct SubscriptionRenewalAndMiscDetails[]",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint16", "name": "renewalCount", "internalType": "uint16" }
+        ]
+      }
+    ],
+    "name": "subscriptionRenewalAndMiscDetailsByIDs",
+    "inputs": [
+      { "type": "uint256[]", "name": "_tokenIDs", "internalType": "uint256[]" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "address", "name": "", "internalType": "address" }],
+    "name": "transferRouter",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "unpause",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "updatePackage",
+    "inputs": [
+      { "type": "uint256", "name": "_packageID", "internalType": "uint256" },
+      {
+        "type": "tuple",
+        "name": "_details",
+        "internalType": "struct PackageDetails",
+        "components": [
+          { "type": "string", "name": "name", "internalType": "string" },
+          { "type": "uint256", "name": "price", "internalType": "uint256" },
+          {
+            "type": "uint64",
+            "name": "subscriptionPeriod",
+            "internalType": "uint64"
+          },
+          { "type": "uint32", "name": "quotaLeft", "internalType": "uint32" },
+          {
+            "type": "uint16",
+            "name": "renewalCount",
+            "internalType": "uint16"
+          },
+          { "type": "uint16", "name": "readerCount", "internalType": "uint16" },
+          {
+            "type": "uint16",
+            "name": "dataFeedType",
+            "internalType": "uint16"
+          },
+          { "type": "bool", "name": "disabled", "internalType": "bool" }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,79 @@
+[
+  { "type": "constructor", "stateMutability": "nonpayable", "inputs": [] },
+  {
+    "type": "event",
+    "name": "AdminProjectRouterSet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "oldAdmin",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "newAdmin",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "caller",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "string", "name": "", "internalType": "string" }],
+    "name": "PROJECT",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract IAdminProjectRouter"
+      }
+    ],
+    "name": "adminProjectRouter",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "deposit",
+    "inputs": [
+      { "type": "address", "name": "poolAddress", "internalType": "address" },
+      { "type": "address", "name": "_token", "internalType": "address" },
+      { "type": "uint256", "name": "_rewardAmount", "internalType": "uint256" },
+      {
+        "type": "address[]",
+        "name": "_nftAddress",
+        "internalType": "address[]"
+      },
+      { "type": "uint256[]", "name": "_tokenIds", "internalType": "uint256[]" },
+      { "type": "address", "name": "_bitkubNexUser", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "setAdminProjectRouter",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_adminProjectRouter",
+        "internalType": "address"
+      }
+    ]
+  }
+]
